@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealthify - Mutual Fund Transaction Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar or Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <div class="logo-icon">W</div>
+                <h1>Wealthify</h1>
+            </div>
+            <p class="tagline">Mutual Fund Transaction Insights</p>
+        </header>
+
+        <!-- Filters Section -->
+        <section class="filter-card">
+            <div class="filter-title">
+                <h3>Filter Transactions by Date Range</h3>
+                <span class="info-badge">Data default is May 2025</span>
+            </div>
+            <div class="filter-controls">
+                <div class="input-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" value="2025-05-01">
+                </div>
+                <div class="input-group">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" value="2025-05-31">
+                </div>
+                <button id="refreshBtn" class="primary-btn">
+                    <span class="btn-text">Refresh Data</span>
+                    <span class="btn-loader hidden"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Navigation Tabs -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-target="overview-tab">
+                Overview
+            </button>
+            <button class="tab-btn" data-target="investor-purchases-tab">
+                Investor Purchase Summary
+            </button>
+            <button class="tab-btn" data-target="fund-purchases-tab">
+                Fund-wise Investor Summary
+            </button>
+            <button class="tab-btn" data-target="investors-tab">
+                Investor Rankings
+            </button>
+            <button class="tab-btn" data-target="funds-tab">
+                Mutual Fund Summaries
+            </button>
+        </nav>
+
+        <!-- Tab Content Areas -->
+        <main class="dashboard-content">
+            
+            <!-- Section 0: Portfolio Overview -->
+            <div id="overview-tab" class="tab-panel active">
+                <div class="panel-header">
+                    <h2>Portfolio Overview</h2>
+                    <p class="panel-desc">Key summary metrics for mutual fund transactions within the selected date range.</p>
+                </div>
+                <div class="overview-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Total Amount Invested</div>
+                        <div class="metric-value" id="metricTotalAmount">₹0.00</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Total Units Purchased</div>
+                        <div class="metric-value" id="metricTotalUnits">0.00</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Unique Investors</div>
+                        <div class="metric-value" id="metricTotalInvestors">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Active Schemes</div>
+                        <div class="metric-value" id="metricTotalFunds">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Investor-wise Purchase Summary per Mutual Fund -->
+            <div id="investor-purchases-tab" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Investor-wise Purchase Summary</h2>
+                    <p class="panel-desc">Summary of purchases grouped by Investor name, PAN number, and Mutual Fund scheme.</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="investorPurchasesTable">
+                        <thead>
+                            <tr>
+                                <th>Investor Name</th>
+                                <th>PAN Number</th>
+                                <th>Mutual Fund Name</th>
+                                <th class="number-col">Total Purchase Amount</th>
+                                <th class="number-col">Total Units Purchased</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Filled dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 2: Mutual Fund-wise Summary per Investor -->
+            <div id="fund-purchases-tab" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Mutual Fund-wise Summary per Investor</h2>
+                    <p class="panel-desc">Summary of mutual fund schemes grouped by scheme name, investor, and PAN number.</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="fundPurchasesTable">
+                        <thead>
+                            <tr>
+                                <th>Mutual Fund Name</th>
+                                <th>Investor Name</th>
+                                <th>PAN Number</th>
+                                <th class="number-col">Total Amount Invested</th>
+                                <th class="number-col">Total Units Purchased</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Filled dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 3: Investor List with Purchase Details -->
+            <div id="investors-tab" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Investor Rankings & Activity</h2>
+                    <p class="panel-desc">Total investment made by individual investors (identified by PAN) within the filtered dates.</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="investorsTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Investor Name</th>
+                                <th>PAN Number</th>
+                                <th class="number-col">Total Amount Invested</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Filled dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 4: Mutual Fund Summary -->
+            <div id="funds-tab" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Mutual Fund Performance Summary</h2>
+                    <p class="panel-desc">Aggregate statistics for each mutual fund scheme, showing total inflows, volume, and average price.</p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="fundsTable">
+                        <thead>
+                            <tr>
+                                <th>Mutual Fund Name</th>
+                                <th class="number-col">Total Amount Invested</th>
+                                <th class="number-col">Total Units Purchased</th>
+                                <th class="number-col">Weighted Avg NAV Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Filled dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Wealthify Dashboard &copy; 2026. Made with vanilla HTML, CSS, and JS.</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
