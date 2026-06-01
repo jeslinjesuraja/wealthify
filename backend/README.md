@@ -1,34 +1,68 @@
-# Wealthify Backend Service
+# 💼 Wealthify - Mutual Fund Transaction Dashboard
 
-FastAPI web service serving Mutual Fund Dashboard.
+## Project Links
 
-## Setup Instructions
+Frontend =https://jeslinjesuraja.github.io/Wealthify_task_frontend/  
+Backend = https://github.com/jeslinjesuraja/wealthify_backend  
 
-### 1. Requirements
-Ensure Python and PostgreSQL are installed.
+Dashboard Screenshot=https://drive.google.com/drive/folders/1sacZG_RcsYdsmLqPGvK1LCxgWhDqHyUL?usp=sharing
 
-### 2. Configure Environment variables
-Ensure `backend/.env` is configured with:
-```env
-DATABASE_URL=postgresql://postgres:AcademyRootPassword@localhost:5432/wealthify
-```
+---
 
-### 3. Install packages
-Run this command from inside the `backend/` directory:
-```bash
-pip install -r requirements.txt
-```
+## 📌 Project Description
 
-### 4. Run the Service
-Run this command from inside the `backend/` directory to launch the server:
-```bash
-uvicorn app.main:app --reload
-```
+A full-stack web application designed to summarize mutual fund transaction activity within a selected date range.
 
-FastAPI will start on `http://127.0.0.1:8000/`.
+This project consists of:
 
-On startup, the server will automatically:
-1. Connect to PostgreSQL.
-2. Initialize tables.
-3. Import records from `dataset.csv` into database.
-4. Serve the HTML dashboard directly on `http://127.0.0.1:8000/`.
+Frontend: A pure HTML/CSS/Vanilla JavaScript application with a simple, clean UI.  
+Backend: A FastAPI Python backend connecting to a PostgreSQL database.
+
+---
+
+## ✅ Requirements Met
+
+### 📊 Investor-wise Purchase Summary per Mutual Fund
+- Total purchase amount per mutual fund  
+- Total NAV units purchased per mutual fund  
+- Filterable by selected date range  
+
+---
+
+### 📈 Mutual Fund-wise Summary per Investor
+- Amount and NAV units purchased by each investor for each mutual fund  
+- Filterable by selected date range  
+
+---
+
+### 👤 Investor List with Purchase Details
+- Investor PAN number  
+- Total amount invested within the selected date range  
+
+---
+
+### 💰 Mutual Fund Summary
+- Total amount invested across all investors  
+- Total NAV units purchased  
+- Average NAV price per mutual fund  
+
+---
+
+## 🛠️ Prerequisites and Tools Required
+
+To run this project locally, ensure you have:
+
+- Python 3.8+
+- pip (Python package manager)
+- PostgreSQL Database
+- A modern browser (Chrome / Edge / Firefox)
+
+---
+
+## ⚙️ How to Setup
+
+### Backend Setup
+
+Open terminal and navigate to backend folder:
+```bash id="setup1"
+cd backend

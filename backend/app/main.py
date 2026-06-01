@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import investors, funds, overview
+from app.routers import investors, funds, overview, transactions
 
 app = FastAPI(
     title="Mutual Fund Transaction Dashboard API",
@@ -35,6 +35,7 @@ def startup_db_populate():
 app.include_router(overview.router, prefix="/api")
 app.include_router(investors.router, prefix="/api")
 app.include_router(funds.router, prefix="/api")
+app.include_router(transactions.router, prefix="/api")
 
 # Simple root endpoint
 @app.get("/")
