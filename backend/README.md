@@ -2,8 +2,8 @@
 
 ## Project Links
 
-Frontend =https://jeslinjesuraja.github.io/Wealthify_task_frontend/  
-Backend = https://github.com/jeslinjesuraja/wealthify_backend  
+Frontend =https://wealthify-blush.vercel.app/
+Backend = https://wealthify-x6qj.onrender.com/  
 ### 📷 Application Screenshots
 
 #### Interactive Mutual Fund Dashboard (With CRUD Actions)
