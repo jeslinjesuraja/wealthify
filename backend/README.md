@@ -4,9 +4,6 @@
 
 Frontend =https://jeslinjesuraja.github.io/Wealthify_task_frontend/  
 Backend = https://github.com/jeslinjesuraja/wealthify_backend  
-
-Dashboard Screenshot=https://drive.google.com/drive/folders/1sacZG_RcsYdsmLqPGvK1LCxgWhDqHyUL?usp=sharing
-
 ### 📷 Application Screenshots
 
 #### Interactive Mutual Fund Dashboard (With CRUD Actions)
