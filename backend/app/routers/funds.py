@@ -1,7 +1,8 @@
+# backend/app/routers/funds.py
 from fastapi import APIRouter, Query, HTTPException
 from psycopg2.extras import RealDictCursor
 from typing import Optional
-from backend.database import get_db_connection
+from app.database import get_db_connection
 
 router = APIRouter()
 
@@ -12,7 +13,6 @@ def get_fund_purchases(
 ):
     """
     Mutual Fund-wise Summary per Investor
-    Displays: Mutual Fund Name, Investor Name, PAN Number, Total Amount Invested, Total Units Purchased
     """
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
@@ -57,8 +57,7 @@ def get_funds(
     end_date: Optional[str] = Query(None)
 ):
     """
-    Mutual Fund Summary
-    Displays: Mutual Fund Name, Total Amount Invested, Total Units Purchased, Average NAV Price
+    Mutual Fund Summary (weighted average NAV)
     """
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)

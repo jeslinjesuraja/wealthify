@@ -1,0 +1,20 @@
+# Environment files (contains database password)
+.env
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# IDE configurations
+.vscode/
+.idea/
+
+# Local logs
+*.log

@@ -1,8 +1,10 @@
 // frontend/script.js
 // Frontend integration for Mutual Fund Transaction Dashboard
 
-// Base URL for backend FastAPI server
-const API_BASE_URL = 'http://127.0.0.1:8000/api';
+// Base URL for backend FastAPI server (resolves dynamically for local and production deployment)
+const API_BASE_URL = window.location.hostname === '' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://127.0.0.1:8000/api'
+    : window.location.origin + '/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialise UI tab event listeners

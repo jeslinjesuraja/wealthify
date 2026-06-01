@@ -1,4 +1,4 @@
-# backend/models.py
+# backend/app/schemas.py
 from pydantic import BaseModel
 
 class InvestorPurchaseSummary(BaseModel):
@@ -25,10 +25,3 @@ class FundSummary(BaseModel):
     total_amount: float
     total_units: float
     avg_nav: float
-
-
-
-
-
-
-

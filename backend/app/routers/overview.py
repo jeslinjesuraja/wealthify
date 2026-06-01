@@ -1,8 +1,8 @@
-# backend/routers/overview.py
+# backend/app/routers/overview.py
 from fastapi import APIRouter, Query, HTTPException
 from psycopg2.extras import RealDictCursor
 from typing import Optional
-from backend.database import get_db_connection
+from app.database import get_db_connection
 
 router = APIRouter()
 
@@ -13,7 +13,6 @@ def get_overview(
 ):
     """
     Overview stats for the selected date range.
-    Returns: Total invested amount, total units purchased, unique investors, and active funds.
     """
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
