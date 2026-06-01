@@ -12,7 +12,8 @@ def get_all_transactions(
     end_date: Optional[str] = Query(None)
 ):
     """
-    GET: Returns a list of raw transaction logs.
+    Retrieves individual transaction records.
+    Allows users to see raw entries before modifying them.
     """
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
@@ -39,44 +40,12 @@ def get_all_transactions(
     try:
         cursor.execute(query, params)
         results = cursor.fetchall()
-        # Format dates as strings for JSON response
+        # Convert datetime objects to string format for easy JSON parsing on frontend
         for r in results:
             if r.get("traddate"):
                 r["traddate"] = r["traddate"].strftime("%Y-%m-%d %H:%M:%S")
         return results
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    finally:
-        cursor.close()
-        conn.close()
-
-@router.post("/transactions")
-def create_transaction(
-    scheme: str = Body(...),
-    inv_name: str = Body(...),
-    pan: str = Body(...),
-    traddate: str = Body(...),
-    purprice: float = Body(...),
-    units: float = Body(...),
-    amount: float = Body(...)
-):
-    """
-    POST: Adds a new transaction record permanently to the database.
-    """
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    query = """
-        INSERT INTO transactions (scheme, inv_name, pan, traddate, purprice, units, amount)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """
-    
-    try:
-        cursor.execute(query, (scheme, inv_name, pan, traddate, purprice, units, amount))
-        conn.commit()
-        return {"message": "Transaction created successfully"}
-    except Exception as e:
-        conn.rollback()
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         cursor.close()
@@ -94,7 +63,7 @@ def update_transaction(
     amount: float = Body(...)
 ):
     """
-    PUT: Modifies an existing transaction log in the database.
+    Updates specific transaction parameters (date, price, units, amount, etc.) by ID.
     """
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -111,29 +80,6 @@ def update_transaction(
         if cursor.rowcount == 0:
             raise HTTPException(status_code=404, detail="Transaction not found")
         return {"message": "Transaction updated successfully"}
-    except Exception as e:
-        conn.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
-    finally:
-        cursor.close()
-        conn.close()
-
-@router.delete("/transactions/{id}")
-def delete_transaction(id: int):
-    """
-    DELETE: Removes a transaction log permanently from the database.
-    """
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    query = "DELETE FROM transactions WHERE id = %s"
-    
-    try:
-        cursor.execute(query, (id,))
-        conn.commit()
-        if cursor.rowcount == 0:
-            raise HTTPException(status_code=404, detail="Transaction not found")
-        return {"message": "Transaction deleted successfully"}
     except Exception as e:
         conn.rollback()
         raise HTTPException(status_code=500, detail=str(e))

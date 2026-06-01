@@ -38,14 +38,9 @@ def import_csv():
         );
     """)
 
-    # Check if table already has data to prevent overwriting user changes on startup
-    cursor.execute("SELECT COUNT(*) FROM transactions;")
-    row_count = cursor.fetchone()[0]
-    if row_count > 0:
-        print("Database already contains data. Skipping initial CSV seeding.")
-        cursor.close()
-        conn.close()
-        return
+    # Clear old entries
+    print("Clearing old transactions...")
+    cursor.execute("TRUNCATE TABLE transactions;")
 
     # Parse and import CSV rows
     print(f"Parsing CSV records from {csv_path}...")

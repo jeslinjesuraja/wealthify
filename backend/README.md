@@ -7,6 +7,15 @@ Backend = https://github.com/jeslinjesuraja/wealthify_backend
 
 Dashboard Screenshot=https://drive.google.com/drive/folders/1sacZG_RcsYdsmLqPGvK1LCxgWhDqHyUL?usp=sharing
 
+### 📷 Application Screenshots
+
+#### Interactive Mutual Fund Dashboard (With CRUD Actions)
+![Mutual Fund Dashboard UI](./assets/dashboard.png)
+![Manage Fund Data](./assets/managedata.png)
+
+#### FastAPI Swagger API Documentation
+![FastAPI Swagger API UI](./assets/image.png)
+
 ---
 
 ## 📌 Project Description
