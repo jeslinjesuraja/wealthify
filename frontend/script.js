@@ -1,7 +1,3 @@
-// frontend/script.js
-// Frontend integration for Mutual Fund Transaction Dashboard with Full CRUD Support
-
-// Base URL for backend FastAPI server (resolves dynamically for local and production deployment)
 const API_BASE_URL = window.location.hostname === '' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:8000/api'
     : 'https://wealthify-x6qj.onrender.com/api';
